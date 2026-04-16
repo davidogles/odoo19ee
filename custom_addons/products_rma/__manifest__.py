@@ -1,0 +1,31 @@
+{
+    'name': 'My Products and RMA',
+    'version': '1.0',
+    'summary': 'Customer portal view for purchased serialized products and RMA workflow.',
+    'description': 'Portal menu to view customer-owned serialized products and request for RMA.',
+    'category': 'Website/Portal',
+    'author': 'SOCIUS-IGB',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'website',
+        'portal',
+        'sale',
+        'stock',
+        'sale_stock',
+        'helpdesk_stock',
+        'account',
+        'helpdesk'
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/products_templates.xml',
+        'views/sale_stock_inherit.xml',
+        'views/helpdesk_view_inherit.xml',
+        'views/tickets_portal_inherit.xml',
+        'views/rma_reason_view.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

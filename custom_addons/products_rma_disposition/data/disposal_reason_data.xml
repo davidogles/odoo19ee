@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="disposal_reason_damaged" model="stock.scrap.reason.tag">
+            <field name="name">Damaged</field>
+        </record>
+
+        <record id="disposal_reason_not_repairable" model="stock.scrap.reason.tag">
+            <field name="name">Not Repairable</field>
+        </record>
+
+        <record id="disposal_reason_expired" model="stock.scrap.reason.tag">
+            <field name="name">Expired</field>
+        </record>
+
+        <record id="disposal_reason_defective" model="stock.scrap.reason.tag">
+            <field name="name">Defective</field>
+        </record>
+
+        <record id="disposal_reason_testing_failure" model="stock.scrap.reason.tag">
+            <field name="name">Testing Failure</field>
+        </record>
+
+        <record id="disposal_reason_other" model="stock.scrap.reason.tag">
+            <field name="name">Other</field>
+        </record>
+    </data>
+</odoo>

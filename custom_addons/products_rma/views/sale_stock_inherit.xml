@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="portal_sale_order_rma_button"
+              inherit_id="sale_stock.sale_order_portal_content_inherit_sale_stock"
+              name="Portal Sale Order RMA Button">
+
+        <xpath expr="//a[contains(@t-att-href, '/my/picking/return/pdf')]" position="replace">
+<!--            <a class="badge rounded-pill text-bg-danger orders_label_text_align"-->
+<!--               t-att-href="'/my/rma/create/%s' % picking.id">-->
+<!--                Return-->
+<!--            </a>-->
+        </xpath>
+
+    </template>
+</odoo>

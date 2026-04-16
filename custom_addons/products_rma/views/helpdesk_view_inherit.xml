@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="helpdesk_ticket_action_main_rma" model="ir.actions.act_window">
+        <field name="name">All RMAs</field>
+        <field name="res_model">helpdesk.ticket</field>
+        <field name="path">all-rmas</field>
+        <field name="view_mode">list,kanban,form,activity,pivot,graph,cohort</field>
+        <field name="search_view_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+        <field name="domain">[('is_rma', '=', True)]</field>
+        <field name="context">{
+            'search_default_is_open': True
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No RMAs found.
+            </p>
+            <p>
+                All customer return requests (RMA) will appear here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="helpdesk_ticket_menu_rma"
+            name="All RMAs"
+            parent="helpdesk.helpdesk_ticket_menu_main"
+            action="helpdesk_ticket_action_main_rma"
+            sequence="30"/>
+
+    <record id="helpdesk_ticket_form_rma_inherited" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.rma.inherited</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="is_rma" readonly="1"/>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='description']" position="before">
+                <page string="Products" name="rma_product_lines" invisible="not is_rma">
+                    <field name="rma_line_ids">
+                        <list editable="bottom">
+                            <field name="rma_lot_id"/>
+                            <field name="product_id"/>
+                            <field name="reason_id"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

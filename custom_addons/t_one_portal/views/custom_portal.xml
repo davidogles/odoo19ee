@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="t_one_portal_template" name="T-One Portal">
+
+        <t t-call="website.layout">
+            <div class="welcome-banner">
+
+                <div class="row align-items-center">
+
+                    <div class="col-lg-6">
+                        <div class="banner-content">
+
+                            <p class="label-wrapper">
+                                <span class="label-line"></span>
+                                <span class="portal-accent portal-label">
+                                    TALITRIX ELECTRONIC MONITORING • T-ONE PORTAL
+                                </span>
+                            </p>
+
+                            <h2 class="mb-3">
+                                Welcome back,
+                                <br/>
+                                <span class="portal-accent">
+                                    <t t-esc="request.env.user.name"/>.
+                                </span>
+                            </h2>
+
+                            <div class="banner-divider"></div>
+
+                            <p>
+                                <span class="mb-4 banner-desc">
+                                    Where Accountability Meets Intelligence - Manage devices, cases and
+                                    communications from a single unified command center.
+                                </span>
+                            </p>
+
+                            <a href="/my" class="btn banner-btn portal-btn">
+                                <i class="fa fa-tachometer me-2"></i>
+                                View Dashboard
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <div class="banner-visual">
+                            <!-- image -->
+                            <img src="/t_one_portal/static/src/img/portal-banner.png"
+                                 class="img-fluid"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="container-fluid quick-access-section px-lg-5 px-3">
+
+                <h5 class="mb-4 fw-bold d-flex align-items-center">
+                    <span class="dot me-2"></span>
+                    Quick Access
+                </h5>
+
+                <div class="row g-4">
+
+                    <!-- User Guide -->
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="card quick-card h-100 text-center p-3">
+
+                            <div class="card-body">
+
+                                <i class="fa fa-book quick-icon mb-3"></i>
+
+                                <h6 class="quick-title">Interactive
+                                    User Guide
+                                </h6>
+
+                                <a href="https://scribehow.com/page/PhoenixLink_Interactive_User_Guide__AgTM5V0ZTiyMxikOQIi2rw"
+                                   class="quick-link-area"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+
+                                    <p>Step-by-step tutorials and platform walkthroughs</p>
+
+                                    <span class="quick-arrow">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Forms -->
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="card quick-card h-100 text-center p-3">
+
+                            <div class="card-body">
+
+                                <i class="fa fa-file-text-o quick-icon mb-3"></i>
+
+                                <h6 class="quick-title">Forms</h6>
+
+
+                                <a href="/forms" class="quick-link-area">
+                                    <p>
+                                        Enrollment, incident and compliance submissions
+                                    </p>
+                                    <span class="quick-arrow">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="card quick-card h-100 text-center p-3">
+
+                            <div class="card-body">
+
+                                <i class="fa fa-question-circle-o quick-icon mb-3"></i>
+
+                                <h6 class="quick-title">FAQ</h6>
+
+
+                                <a href="/faq" class="quick-link-area">
+                                    <p>
+                                        Answers for officers, victims &amp; participants
+                                    </p>
+                                    <span class="quick-arrow">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Order -->
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="card quick-card h-100 text-center p-3">
+
+                            <div class="card-body">
+
+                                <i class="fa fa-shopping-cart quick-icon mb-3"></i>
+
+                                <h6 class="quick-title">Order
+                                    Equipment
+                                </h6>
+
+
+                                <a href="/shop" class="quick-link-area">
+                                    <p>
+                                        Request new monitoring devices and accessories
+                                    </p>
+                                    <span class="quick-arrow">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Return -->
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="card quick-card h-100 text-center p-3">
+
+                            <div class="card-body">
+
+                                <i class="fa fa-undo quick-icon mb-3"></i>
+
+                                <h6 class="quick-title">Return Equipment</h6>
+
+                                <a href="/my/products/rma" class="quick-link-area">
+                                    <p>
+                                        Initiate RMA, device return or loss report
+                                    </p>
+                                    <span class="quick-arrow">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Tickets -->
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="card quick-card h-100 text-center p-3">
+
+                            <div class="card-body">
+
+                                <i class="fa fa-bookmark-o quick-icon mb-3"></i>
+
+                                <h6 class="quick-title">Tickets</h6>
+                                <a href="/my/tickets" class="quick-link-area">
+
+                                    <p>
+                                        Create, track and manage technical support tickets.
+                                    </p>
+                                    <span class="quick-arrow">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid quick-access-section px-lg-5 px-3">
+
+                <div class="row g-4">
+
+                    <!-- LEFT: Account Manager -->
+                    <div class="col-md-6">
+                        <div class="card info-card h-100 p-4">
+
+                            <div class="d-flex align-items-start gap-3 mb-1">
+
+                                <span class="section-icon">
+                                    <i class="fa fa-user-o"></i>
+                                </span>
+
+                                <div>
+                                    <h6 class="fw-bold mb-1">Your Account Manager</h6>
+                                    <p class="text-muted small mb-0">
+                                        Dedicated point of contact for your agency
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <hr class="section-divider"/>
+
+                            <div class="manager-card d-flex gap-3 align-items-start">
+
+                                <!-- LEFT: Avatar -->
+                                <div class="manager-avatar">
+                                    JD
+                                </div>
+
+                                <!-- RIGHT: Details -->
+                                <div class="manager-details">
+
+                                    <div class="manager-name">John Doe</div>
+
+                                    <div class="manager-role">Account Manager</div>
+
+                                    <div class="manager-contact mt-2">
+                                        <div class="contact-item">
+                                            <i class="fa fa-envelope"></i>
+                                            <span>john.doe@email.com</span>
+                                        </div>
+
+                                        <div class="contact-item">
+                                            <i class="fa fa-phone"></i>
+                                            <span>+1 234 567 890</span>
+                                        </div>
+
+                                        <div class="contact-item">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span>Mon - Fri 8 AM - 6 PM CT</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Support Lines -->
+                    <div class="col-md-6">
+                        <div class="card info-card h-100 p-4">
+
+                            <div class="d-flex align-items-start gap-3 mb-1">
+
+                                <span class="section-icon">
+                                    <i class="fa  fa-volume-control-phone"></i>
+                                </span>
+
+                                <div>
+                                    <h6 class="fw-bold mb-1">24 / 7 Support Lines</h6>
+                                    <p class="text-muted small mb-0">
+                                        Always-on direct lines for every stakeholder
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <hr class="section-divider"/>
+
+                            <div class="helpline-item helpline-orange d-flex align-items-center justify-content-between">
+
+                                <!-- LEFT: -->
+                                <div class="d-flex align-items-start gap-3">
+
+                                    <!-- Icon -->
+                                    <div class="helpline-icon">
+                                        <i class="fa fa-shield"></i>
+                                    </div>
+
+                                    <!-- Text -->
+                                    <div>
+                                        <div class="helpline-title">Victim Line</div>
+                                        <p class="helpline-desc mb-0">Confidential Victim advocates available 24/7</p>
+                                    </div>
+
+                                </div>
+
+                                <!-- RIGHT: Number -->
+                                <div class="helpline-number">
+                                    (800) 555-0101
+                                </div>
+
+                            </div>
+
+                            <div class="helpline-item helpline-grey d-flex align-items-center justify-content-between">
+
+                                <!-- LEFT: -->
+                                <div class="d-flex align-items-start gap-3">
+
+                                    <!-- Icon -->
+                                    <div class="helpline-icon">
+                                        <i class="fa fa-user-circle"></i>
+                                    </div>
+
+                                    <!-- Text -->
+                                    <div>
+                                        <div class="helpline-title">Officer Line</div>
+                                        <p class="helpline-desc mb-0">Priority routing for supervising officers</p>
+                                    </div>
+
+                                </div>
+
+                                <!-- RIGHT: Number -->
+                                <div class="helpline-number">
+                                    (800) 555-0202
+                                </div>
+
+                            </div>
+
+                            <div class="helpline-item helpline-black d-flex align-items-center justify-content-between">
+
+                                <!-- LEFT: -->
+                                <div class="d-flex align-items-start gap-3">
+
+                                    <!-- Icon -->
+                                    <div class="helpline-icon">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+
+                                    <!-- Text -->
+                                    <div>
+                                        <div class="helpline-title">Participant Line</div>
+                                        <p class="helpline-desc mb-0">Device support and compliance guidance</p>
+                                    </div>
+
+                                </div>
+
+                                <!-- RIGHT: Number -->
+                                <div class="helpline-number">
+                                    (800) 555-0303
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

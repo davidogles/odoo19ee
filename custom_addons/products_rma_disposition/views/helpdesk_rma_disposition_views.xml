@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="helpdesk_ticket_form_rma_disposition" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.rma.disposition</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="products_rma.helpdesk_ticket_form_rma_inherited"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='rma_line_ids']/list/field[@name='reason_id']" position="after">
+                <field name="disposition"/>
+                <field name="disposal_reason_ids" widget="many2many_tags"
+                       required="disposition == 'dispose'"
+                       invisible="disposition != 'dispose'"/>
+                <field name="scrap_id" optional="hide"/>
+                <button name="action_process_disposition" 
+                        type="object" 
+                        string="Dispose"
+                        class="btn-primary"
+                        invisible="not disposition or scrap_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

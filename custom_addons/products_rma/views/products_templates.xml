@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="portal_my_home_sale_inherit_products"
+              name="Portal My Home - Add My Products"
+              inherit_id="sale.portal_my_home_sale"
+              priority="25">
+
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/sale/static/src/img/bag.svg'"/>
+                <t t-set="title">Your Products</t>
+                <t t-set="url" t-value="'/my/products'"/>
+                <t t-set="text">View and manage your products</t>
+                <t t-set="placeholder_count" t-value="'product_count'"/>
+            </t>
+        </div>
+
+    </template>
+
+    <template id="portal_my_products" name="My Products">
+        <t t-call="portal.portal_layout" breadcrumbs_searchbar="True">
+
+            <t t-call="portal.portal_searchbar" title.translate="Your Products" searchbar_filters="searchbar_filters"
+               filterby="filterby"/>
+            <div t-if="not move_lines" class="alert alert-warning" role="alert">
+                You have not purchased any products yet.
+            </div>
+
+            <t t-if="move_lines" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Serial Number</th>
+                        <th>Product</th>
+                        <th class="text-end">Category</th>
+                        <th class="text-end">Delivered On</th>
+                    </tr>
+                </thead>
+
+                <t t-foreach="move_lines" t-as="line">
+                    <tr>
+                        <!-- Serial -->
+                        <td>
+                            <span t-field="line.lot_id.name"/>
+                        </td>
+
+                        <!-- Product -->
+                        <td>
+                            <a t-att-href="'/shop/product/%s' % line.product_id.product_tmpl_id.id">
+                                <span t-field="line.product_id.display_name"/>
+                            </a>
+                        </td>
+
+                        <!-- Category -->
+                        <td class="text-end">
+                            <span t-field="line.product_id.categ_id.display_name"/>
+                        </td>
+
+                        <!-- Delivery Date -->
+                        <td class="text-end">
+                            <span t-field="line.date" t-options="{'widget': 'date'}"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+    <template id="portal_rma_form" name="Portal RMA Form">
+        <t t-call="portal.portal_layout" breadcrumbs_searchbar="True">
+            <t t-call="portal.portal_searchbar" title.translate="Request RMA" searchbar_filters="searchbar_filters"
+               filterby="filterby"/>
+
+            <div class="container mt-4">
+                <form action="/my/products/rma/confirm" method="post">
+
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width:40px;"></th>
+                                <th>Serial</th>
+                                <th>Product</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="move_lines" t-as="ml">
+
+                                <t t-set="lot_id" t-value="ml.lot_id.id"/>
+                                <t t-set="existing_ticket" t-value="rma_map.get(lot_id)"/>
+
+                                <tr t-att-class="existing_ticket and 'table-danger' or ''">
+
+                                    <!-- Checkbox Column -->
+                                    <td class="text-center">
+
+                                        <t t-if="existing_ticket">
+                                            <i class="fa fa-lock text-danger"/>
+                                        </t>
+                                        <t t-else="">
+                                            <input type="checkbox"
+                                                   class="line-checkbox"
+                                                   t-att-data-id="ml.id"
+                                                   t-att-name="'line_%s' % ml.id"/>
+                                        </t>
+
+                                    </td>
+
+                                    <!-- Serial -->
+                                    <td>
+                                        <span class="badge bg-secondary">
+                                            <t t-out="ml.lot_id.name"/>
+                                        </span>
+
+                                        <t t-if="existing_ticket">
+                                            <span class="badge bg-danger ms-2">
+                                                RMA In Progress
+                                            </span>
+                                        </t>
+                                    </td>
+
+                                    <!-- Product -->
+                                    <td>
+                                        <t t-out="ml.product_id.display_name"/>
+
+                                        <t t-if="existing_ticket">
+                                            <div class="mt-1">
+                                                <a t-att-href="existing_ticket.access_url"
+                                                   class="text-decoration-none small">
+                                                    View Ticket
+                                                </a>
+                                            </div>
+                                        </t>
+                                    </td>
+
+                                    <!-- Reason -->
+                                    <td>
+
+                                        <t t-if="existing_ticket">
+                                            <select class="form-select form-select-sm" disabled="disabled">
+                                                <option>Already Requested</option>
+                                            </select>
+                                        </t>
+
+                                        <t t-else="">
+                                            <select class="form-select form-select-sm reason-select"
+                                                    t-att-name="'reason_%s' % ml.id"
+                                                    t-att-data-id="ml.id">
+                                                <option value="">Select Reason</option>
+                                                <t t-foreach="reasons" t-as="reason">
+                                                    <option t-att-value="reason.id">
+                                                        <t t-out="reason.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </t>
+
+                                    </td>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-center mt-3">
+                        <t t-call="portal.pager"/>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="/my/products" class="btn btn-secondary">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary" id="continue_btn" disabled="disabled">
+                            Continue
+                        </button>
+                    </div>
+
+                </form>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+
+                    const checkboxes = document.querySelectorAll(".line-checkbox");
+                    const continueBtn = document.getElementById("continue_btn");
+
+                    function toggleButton() {
+                    let anyChecked = false;
+
+                    checkboxes.forEach(function (cb) {
+                    const id = cb.dataset.id;
+                    const reasonSelect = document.querySelector(
+                    '.reason-select[data-id="' + id + '"]'
+                    );
+
+                    if (cb.checked) {
+                    anyChecked = true;
+                    reasonSelect.required = true; // required ONLY if checked
+                    } else {
+                    reasonSelect.required = false; // remove required if not checked
+                    }
+                    });
+
+                    continueBtn.disabled = !anyChecked;
+                    }
+
+                    checkboxes.forEach(function (cb) {
+                    cb.addEventListener("change", toggleButton);
+                    });
+
+                    toggleButton();
+                    });
+                </script>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="portal_rma_confirm_template" name="Portal RMA Confirm">
+        <t t-call="portal.portal_layout">
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Confirm RMA Request</t>
+            </t>
+
+            <div class="container mt-4">
+
+                <form action="/my/products/rma/submit" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Serial</th>
+                                <th>Product</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="selected_lines" t-as="line">
+                                <tr>
+                                    <td>
+                                        <t t-out="line['serial']"/>
+                                    </td>
+                                    <td>
+                                        <t t-out="line['product']"/>
+                                    </td>
+                                    <td>
+                                        <t t-out="line['reason_name']"/>
+                                    </td>
+                                </tr>
+
+                                <!-- Hidden values to pass again -->
+                                <input type="hidden"
+                                       t-att-name="'move_%s' % line['move_id']"
+                                       t-att-value="line['move_id']"/>
+
+                                <input type="hidden"
+                                       t-att-name="'reason_%s' % line['move_id']"
+                                       t-att-value="line['reason_id']"/>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="mb-3">
+                        <label class="form-label">Additional Notes</label>
+                        <textarea name="note" class="form-control"/>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit"
+                                formaction="/my/products/rma"
+                                formmethod="post"
+                                class="btn btn-secondary mb-2">
+                            Back
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            Submit RMA
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="portal_my_products_searchbar_rma_btn"
+              inherit_id="portal.portal_searchbar">
+
+        <xpath expr="//div[@t-if='searchbar_filters']" position="after">
+
+            <t t-if="page_name == 'my_products' and has_serialized_products">
+                <div class="ms-lg-2">
+                    <a href="/my/products/rma"
+                       class="btn btn-primary">
+                        Request RMA
+                    </a>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_disposal_reason_tree" model="ir.ui.view">
+        <field name="name">rma.disposal.reason.tree</field>
+        <field name="model">stock.scrap.reason.tag</field>
+        <field name="arch" type="xml">
+            <list string="Disposal Reasons">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_disposal_reason_form" model="ir.ui.view">
+        <field name="name">stock.scrap.reason.tag.form</field>
+        <field name="model">stock.scrap.reason.tag</field>
+        <field name="arch" type="xml">
+            <form string="Disposal Reason">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_disposal_reason" model="ir.actions.act_window">
+        <field name="name">Disposal Reasons</field>
+        <field name="res_model">stock.scrap.reason.tag</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_disposal_reason"
+              name="Disposal Reasons"
+              parent="helpdesk.helpdesk_menu_config"
+              action="action_disposal_reason"
+              sequence="50"/>
+</odoo>

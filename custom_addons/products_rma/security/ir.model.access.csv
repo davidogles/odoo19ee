@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rma_reason_user,RMA reason user,model_rma_reason,base.group_user,1,0,0,0
+access_rma_reason_helpdesk,RMA reason helpdesk,model_rma_reason,helpdesk.group_helpdesk_user,1,1,1,0
+access_rma_reason_admin,RMA reason admin,model_rma_reason,base.group_system,1,1,1,1
+access_helpdesk_rma_line_user,Helpdesk RMA user,model_helpdesk_rma_line,base.group_user,1,0,0,0
+access_helpdesk_rma_line_helpdesk,Helpdesk RMA helpdesk,model_helpdesk_rma_line,helpdesk.group_helpdesk_user,1,1,1,0
+access_helpdesk_rma_line_admin,Helpdesk RMA admin,model_helpdesk_rma_line,base.group_system,1,1,1,1
